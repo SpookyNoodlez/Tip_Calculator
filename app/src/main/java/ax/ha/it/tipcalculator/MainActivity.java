@@ -3,7 +3,8 @@ package ax.ha.it.tipcalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
+
+import java.text.DecimalFormat;
 
 import ax.ha.it.tipcalculator.databinding.ActivityMainBinding;
 
@@ -11,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private Calculator calculator;
+
+    public MainActivity() {
+        this.calculator = new Calculator();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
             double tip = calculator.calculateTip(bill, percent);
             double total = bill + tip;
 
-            binding.tipDisplay.setText(Double.toString(tip));
-            binding.resultDisplay.setText(Double.toString(total));
+            DecimalFormat df = new DecimalFormat("0.00");
+            String stringTotal = df.format(total);
+            String stringTip = df.format(tip);
+
+            binding.tipDisplay.setText(stringTip);
+            binding.resultDisplay.setText(stringTotal);
         });
 
     }
