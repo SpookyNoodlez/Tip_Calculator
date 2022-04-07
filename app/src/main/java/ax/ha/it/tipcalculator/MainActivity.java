@@ -3,6 +3,7 @@ package ax.ha.it.tipcalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -25,19 +26,26 @@ public class MainActivity extends AppCompatActivity {
 
         binding.buttonCalculate.setOnClickListener(view -> {
             String billText = binding.tipLessBill.getText().toString();
-            double bill = Double.parseDouble(billText);
             String percentText = binding.tipPercentage.getText().toString();
-            double percent = Double.parseDouble(percentText);
 
-            double tip = calculator.calculateTip(bill, percent);
-            double total = bill + tip;
+            try {
+                double bill = Double.parseDouble(billText);
+                double percent = Double.parseDouble(percentText);
 
-            DecimalFormat df = new DecimalFormat("0.00");
-            String stringTotal = df.format(total);
-            String stringTip = df.format(tip);
+                double tip = calculator.calculateTip(bill, percent);
+                double total = bill + tip;
 
-            binding.tipDisplay.setText(stringTip);
-            binding.resultDisplay.setText(stringTotal);
+                DecimalFormat df = new DecimalFormat("0.00");
+                String stringTotal = df.format(total);
+                String stringTip = df.format(tip);
+
+                binding.tipDisplay.setText(stringTip);
+                binding.resultDisplay.setText(stringTotal);
+            } catch (Exception e){
+                //Pop up
+                Toast.makeText(getApplicationContext(),"Enter an amount and a percentage",Toast.LENGTH_SHORT);
+            }
+
         });
 
     }
