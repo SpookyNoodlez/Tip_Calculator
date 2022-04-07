@@ -43,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 binding.resultDisplay.setText(stringTotal);
             } catch (Exception e){
                 //Pop up
-                Toast.makeText(getApplicationContext(),"Enter an amount and a percentage",Toast.LENGTH_SHORT);
+                 Toast toast = Toast.makeText(getApplicationContext(),"Enter an amount and a percentage",Toast.LENGTH_SHORT);
+                 toast.show();
             }
-
         });
-
     }
 }
